@@ -14,10 +14,10 @@ class Calculator:
         self.entry.delete(0,END)
         self.operator =""
 
-    ''' def delete(self):
-        self.operator = str(self.entry.delete(len(self.entry.get())-1))
-    '''
-
+    # Contribution: Delete key for most recent input
+    def delete(self):
+        self.operator = self.operator[:-1]
+        self.var.set(self.operator)
 
     def evaluate(self):
         self.answer =eval(self.entry.get())
@@ -102,18 +102,19 @@ class Calculator:
         button_equal = Button(label_equal, text='=', font=('Helvetica', '16'),command= self.evaluate,bg='black',fg='cyan')
         button_equal.pack()
 
+        #Contribution: Adjusting spacing for new Del key, adding Del key with functionality.
         label_C = Label(label_fkey, bg='black')
-        label_C.grid(row=0, column=0,columnspan=2)
-        button_C = Button(label_C, text='C', font=('Helvetica', '16'), height=1, width=10,command=  self.clear,bg='black',fg='cyan')
+        label_C.grid(row=0, column=0, sticky=W, padx=10, pady=10)
+        button_C = Button(label_C, text='C', font=('Helvetica', '16'), height=1, width=3,command=  self.clear,bg='black',fg='cyan')
         button_C.pack(side=LEFT)
 
-        '''label_del = Label(label_fkey, bg ='black')
+        label_del = Label(label_fkey, bg ='black')
         label_del.grid(row=0,column=1,sticky=E)
-        button_del = Button(label_del, text='del', font=('Helvetica', '16'),bd=3, height=1, width=3,command=  self.delete)
-        button_del.pack()'''
+        button_del = Button(label_del, text='Del', font=('Helvetica', '16'), height=1, width=3,command=self.delete, bg='black', fg='cyan')
+        button_del.pack(side=LEFT)
 
         label_sub = Label(label_fkey, bg='black')
-        label_sub.grid(row=1, column=0, sticky=W, pady=10)
+        label_sub.grid(row=1, column=0, sticky=W, padx=10, pady=10)
         button_sub = Button(label_sub, text='-', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('-'),bg='black',fg='cyan')
         button_sub.pack(side=LEFT)
 
@@ -123,7 +124,7 @@ class Calculator:
         button_mul.pack()
 
         label_div = Label(label_fkey, bg='black')
-        label_div.grid(row=2, column=0, sticky=W)
+        label_div.grid(row=2, column=0, sticky=W, padx=10)
         button_div = Button(label_div, text='/', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('/'),bg='black',fg='cyan')
         button_div.pack()
 
@@ -133,7 +134,7 @@ class Calculator:
         button_add.pack()
 
         label_lbrace = Label(label_fkey, bg='black')
-        label_lbrace.grid(row=3,column=0,sticky=W,pady=10)
+        label_lbrace.grid(row=3,column=0,sticky=W, padx=10, pady=10)
         button_lbrace = Button(label_lbrace,text='(', font=('Helvetica', '16'), height=1, width=3,command= lambda: self.click_button('('),bg='black',fg='cyan')
         button_lbrace.pack()
 
