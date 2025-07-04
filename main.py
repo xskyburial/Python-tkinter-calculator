@@ -19,10 +19,26 @@ class Calculator:
         self.operator = self.operator[:-1]
         self.var.set(self.operator)
 
+
+    # Contribution: Catches input errors and displays an "Error" message
     def evaluate(self):
-        self.answer =eval(self.entry.get())
-        self.var.set(self.answer)
-        self.operator = str(self.answer)
+        # if x is used for multiplication 
+        expr = self.operator.replace('x','*')
+
+        try:
+            result = eval(expr)
+        except Exception:
+            # clear the broken expression
+            self.operator = ""
+            # show “Error” in the display
+            self.var.set("Error")
+        else:
+            # on success, update both internal state and display
+            self.operator = str(result)
+            self.var.set(self.operator)
+
+
+
 
     def __init__(self,master):
 
