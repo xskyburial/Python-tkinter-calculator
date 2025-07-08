@@ -1,13 +1,21 @@
 from tkinter import *
+import re
 
 root = Tk()
 #button_9 = Button(label_key,text='9',height=3,width=5,font=('Helvetica','12'))
 #button_9.grid(row=0,column=0)
 class Calculator:
-    def click_button(self,numbers):
-        global operator
-        global var
-        self.operator = self.operator + str(numbers)
+    def click_button(self, char):
+        # Contribution: If the user pressed “.”, check the current number
+        if char == '.':
+            # split the expression on any operator to get the last (current) number
+            last_number = re.split(r'[\+\-\*/]', self.operator)[-1]
+             # if it already contains a “.”, ignore press
+            if '.' in last_number:
+                return
+
+        # Otherwise append the character as before
+        self.operator += str(char)
         self.var.set(self.operator)
 
     def clear(self):
